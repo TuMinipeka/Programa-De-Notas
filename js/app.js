@@ -14,9 +14,13 @@ boton.addEventListener("click", function(event){
     //Se meten las tres notas como arreglo dentro de la Matriz
     matrizNotas.push([c1,c2,c3])
     console.log(contador)
+    console.log(alumnos)
     console.log("Matriz de Notas:", matrizNotas);
     if (contador==10){
         boton.hidden=true;
     }
-    console.log(alumnos)
+    document.getElementById("nombre").value = "";
+    document.getElementById("certamen1").value = "";
+    document.getElementById("certamen2").value = "";
+    document.getElementById("certamen3").value = "";
 });
