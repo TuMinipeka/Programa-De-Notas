@@ -1,5 +1,3 @@
-const { createElement } = require("react");
-
 const boton=document.getElementById("buttonAdd");
 
 
