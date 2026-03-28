@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    margin-top: 1rem;
+    font-size: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    max-width: 25%;
+    margin: 0 auto;
+    min-height: 25rem;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 10px 6px 50px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+/* Para que no se vean las flechas en los inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:focus {
+    border-color: #2ecc71;
+}
+
+.button {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #2ecc71;
+    transition: background-color 0.3s;
+}
+
+.button:active{
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
+}
+
+.button:hover {
+    background-color: #27ae60;
+}
