@@ -9,6 +9,16 @@ boton.addEventListener("click", function(event){
     const c1=Number(document.getElementById("certamen1").value)
     const c2=Number(document.getElementById("certamen2").value)
     const c3=Number(document.getElementById("certamen3").value)
+    //Validacion De Espacios
+    if (inputValue===""){
+        alert("Nombre incompletos")
+        return event;
+    }
+    //Validacion de Rango 1 a 100
+    if (c1,c2,c3 == 0){
+        alert("Na")
+        return event;
+    }
     //Se Guarda El Nombre
     let contador = alumnos.push(inputValue);
     //Se meten las tres notas como arreglo dentro de la Matriz
