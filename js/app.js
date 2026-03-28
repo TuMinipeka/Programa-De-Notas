@@ -1,8 +1,16 @@
-const nombres=document.getElementById("nombre-resultado");
-const nota1=document.getElementById("c1-nombre")
-const nota2=document.getElementById("c1-nombre")
-const nota3=document.getElementById("c1-nombre")
+const { createElement } = require("react");
+
+const boton=document.getElementById("buttonAdd");
 
 
-let nombre = [[nombres],[10]]
-let notas =[]
+boton.addEventListener("click", function(event){
+    event.preventDefault()
+    const inputValue=document.getElementById("nombre").value;
+    const certamen1=document.getElementById("certamen1").value;
+    const certamen2=document.getElementById("certamen2").value;
+    const certamen3=document.getElementById("certamen3").value;
+
+    const p =createElement("p")
+    p.innerHTML=`Nombre: ${inputValue}`
+    
+});
