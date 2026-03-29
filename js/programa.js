@@ -42,13 +42,33 @@ botonResultados.addEventListener("click", function(event){
     event.preventDefault();
     resultados.innerHTML = "";
     alumnos.forEach((alumno,indice) => {
-    resultados.innerHTML+=`<p>(${indice+1}: ${alumno})</p>`;
-    resultados.innerHTML+=`<p>C1: ${matrizNotas[indice][0]}</p>`;
-    resultados.innerHTML+=`<p>C2: ${matrizNotas[indice][1]}</p>`;
-    resultados.innerHTML+=`<p>C3: ${matrizNotas[indice][2]}</p>`;
-
-    let promedio = ((matrizNotas[indice][0] + matrizNotas[indice][1] + matrizNotas[indice][2]) / 3).toFixed(2);
-    resultados.innerHTML += `<p>Promedio: ${promedio}</p>`;
+        resultados.innerHTML+=`<p>(${indice+1}: ${alumno})</p>`;
+        resultados.innerHTML+=`<p>C1: ${matrizNotas[indice][0]}</p>`;
+        resultados.innerHTML+=`<p>C2: ${matrizNotas[indice][1]}</p>`;
+        resultados.innerHTML+=`<p>C3: ${matrizNotas[indice][2]}</p>`;
+        let promedio = ((matrizNotas[indice][0] + matrizNotas[indice][1] + matrizNotas[indice][2]) / 3).toFixed(2);
+        resultados.innerHTML += `<p>Promedio: ${promedio}</p>`;
     });
+    // Promedio del curso por certamen
+let promedioC1 = matrizNotas.map(notas => notas[0]).reduce((sum, nota) => sum + nota, 0) / alumnos.length;
+let promedioC2 = matrizNotas.map(notas => notas[1]).reduce((sum, nota) => sum + nota, 0) / alumnos.length;
+let promedioC3 = matrizNotas.map(notas => notas[2]).reduce((sum, nota) => sum + nota, 0) / alumnos.length;
+
+// Promedio general del curso
+let promedioGeneral = ((promedioC1 + promedioC2 + promedioC3) / 3).toFixed(2);
+
+// Aprobados y reprobados
+let promedios = matrizNotas.map(notas => (notas[0] + notas[1] + notas[2]) / 3);
+let aprobados = promedios.filter(p => p >= 55).length;
+let reprobados = promedios.filter(p => p < 55).length;
+
+// Mostrar en el DOM
+resultados.innerHTML += `<br>`;
+resultados.innerHTML += `<p>Promedio del curso C1: ${promedioC1.toFixed(2)}</p>`;
+resultados.innerHTML += `<p>Promedio del curso C2: ${promedioC2.toFixed(2)}</p>`;
+resultados.innerHTML += `<p>Promedio del curso C3: ${promedioC3.toFixed(2)}</p>`;
+resultados.innerHTML += `<p>Promedio Final Curso: ${promedioGeneral}</p>`;
+resultados.innerHTML += `<p>Aprobados: ${aprobados}</p>`;
+resultados.innerHTML += `<p>Reprobados: ${reprobados}</p>`;
 });
 
