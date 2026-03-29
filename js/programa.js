@@ -35,13 +35,13 @@ boton.addEventListener("click", function(event){
 });
 
 //Calcular y Dom
-const resultados = document.querySelector('.resultados');
+const resultados = document.querySelector('#contenido-resultados');
 const botonResultados = document.getElementById("buttonCal");
 
 botonResultados.addEventListener("click", function(event){ 
     event.preventDefault();
     resultados.innerHTML = "";
-    alumnos.forEach((alumnos,indice) => {
+    alumno.forEach((alumnos,indice) => {
     console.log(`${indice}: ${alumnos}`);
     });
 });
