@@ -21,11 +21,10 @@ boton.addEventListener("click", function(event){
     }
     //Se Guarda El Nombre
     let contador = alumnos.push(inputValue);
+    console.log(alumnos)
     //Se meten las tres notas como arreglo dentro de la Matriz
     matrizNotas.push([c1,c2,c3])
-    console.log(contador)
-    console.log(alumnos)
-    console.log("Matriz de Notas:", matrizNotas);
+    console.log(matrizNotas)
     if (contador==10){
         boton.hidden=true;
     }
@@ -34,3 +33,16 @@ boton.addEventListener("click", function(event){
     document.getElementById("certamen2").value = "";
     document.getElementById("certamen3").value = "";
 });
+
+//Calcular y Dom
+const resultados = document.querySelector('.resultados');
+const botonResultados = document.getElementById("buttonCal");
+
+botonResultados.addEventListener("click", function(event){ 
+    event.preventDefault();
+    resultados.innerHTML = "";
+    alumnos.forEach((alumnos,indice) => {
+    console.log(`${indice}: ${alumnos}`);
+    });
+});
+
