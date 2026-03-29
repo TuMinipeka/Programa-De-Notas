@@ -5,85 +5,247 @@
 }
 
 body {
-    background-color: aliceblue;
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2d3748;
+    padding-bottom: 3rem;
 }
 
 h1 {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    font-size: 1.6rem;
+    color: #1a202c;
+}
+
+h2 {
+    font-size: 1.3rem;
+    color: #1a202c;
+    margin-bottom: 1rem;
 }
 
 label {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 0.2rem;
     margin-top: 1rem;
-    font-size: 20px;
+    font-size: 16px;
+    color: #4a5568;
 }
 
 .content {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
-    max-width: 25%;
+    width: 90%;
+    max-width: 420px;
     margin: 0 auto;
-    min-height: 25rem;
-    border-radius: 20px;
-    padding: 1rem;
-    box-shadow: 10px 6px 50px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3rem;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
 }
 
-.resultados{
+.resultados {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
-    max-width: 25%;
-    margin: 0 auto;
-    min-height: 25rem;
-    border-radius: 20px;
-    padding: 1rem;
-    box-shadow: 10px 6px 50px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 420px;
+    margin: 2rem auto;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .input {
     width: 100%;
-    border-radius: 5px;
-    padding: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1.5px solid #e2e8f0;
     font-size: 15px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f7fafc;
 }
-/* Para que no se vean las flechas en los inputs */
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .input:focus {
     border-color: #2ecc71;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+    background-color: #fff;
 }
 
 .button {
     width: 100%;
-    margin-top: 1.5rem;
-    padding: 9px;
+    margin-top: 1.2rem;
+    padding: 11px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 15px;
+    font-weight: 600;
     color: #fff;
     cursor: pointer;
     background-color: #2ecc71;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
 }
 
-.button:active{
+.button:active {
     transform: translateY(1px);
     box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
 }
 
 .button:hover {
     background-color: #27ae60;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.contador {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 14px;
+    color: #718096;
+    font-weight: 500;
+}
+
+/* Estilos para los resultados */
+.alumno-bloque {
+    background-color: #f7fafc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #2ecc71;
+}
+
+.alumno-bloque p {
+    margin-bottom: 0.3rem;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.alumno-nombre {
+    font-weight: 700;
+    font-size: 16px !important;
+    color: #1a202c !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.alumno-promedio {
+    font-weight: 600;
+    color: #2ecc71 !important;
+    margin-top: 0.3rem;
+}
+
+.alumno-reprobado {
+    border-left-color: #e74c3c;
+}
+
+.alumno-reprobado .alumno-promedio {
+    color: #e74c3c !important;
+}
+
+/* Bloque de resumen */
+.resumen-bloque {
+    background-color: #edf2f7;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-top: 3px solid #2ecc71;
+}
+
+.resumen-bloque h3 {
+    font-size: 15px;
+    color: #1a202c;
+    margin-bottom: 0.8rem;
+}
+
+.resumen-bloque p {
+    margin-bottom: 0.4rem;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.resumen-valor {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Bloque de ranking */
+.ranking-bloque {
+    background-color: #f7fafc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-top: 3px solid #3182ce;
+}
+
+.ranking-bloque h3 {
+    font-size: 15px;
+    color: #1a202c;
+    margin-bottom: 0.8rem;
+}
+
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+}
+
+.ranking-item:last-child {
+    border-bottom: none;
+}
+
+.ranking-pos {
+    font-weight: 700;
+    color: #3182ce;
+    min-width: 30px;
+}
+
+.ranking-nombre {
+    flex: 1;
+    color: #4a5568;
+}
+
+.ranking-promedio {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Badge de aprobados/reprobados */
+.badge-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.8rem;
+}
+
+.badge {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.badge-aprobado {
+    background-color: #c6f6d5;
+    color: #276749;
+}
+
+.badge-reprobado {
+    background-color: #fed7d7;
+    color: #9b2c2c;
 }
