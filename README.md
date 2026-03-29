@@ -31,4 +31,4 @@
 
 ## 👤 Autor
 
-**danie** — *CampusLands*
+**Daniel**
