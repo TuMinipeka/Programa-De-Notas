@@ -41,8 +41,14 @@ const botonResultados = document.getElementById("buttonCal");
 botonResultados.addEventListener("click", function(event){ 
     event.preventDefault();
     resultados.innerHTML = "";
-    alumno.forEach((alumnos,indice) => {
-    console.log(`${indice}: ${alumnos}`);
+    alumnos.forEach((alumno,indice) => {
+    resultados.innerHTML+=`<p>(${indice+1}: ${alumno})</p>`;
+    resultados.innerHTML+=`<p>C1: ${matrizNotas[indice][0]}</p>`;
+    resultados.innerHTML+=`<p>C2: ${matrizNotas[indice][1]}</p>`;
+    resultados.innerHTML+=`<p>C3: ${matrizNotas[indice][2]}</p>`;
+
+    let promedio = ((matrizNotas[indice][0] + matrizNotas[indice][1] + matrizNotas[indice][2]) / 3).toFixed(2);
+    resultados.innerHTML += `<p>Promedio: ${promedio}</p>`;
     });
 });
 
