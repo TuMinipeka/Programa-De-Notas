@@ -4,38 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/programa.js" defer></script>
-    <title>Programa De Notas</title>
+    <title>Programa de Notas</title>
 </head>
 <body>
-    <div class="general">
-        <div>
-            <h1>Bienvenidos al Programa De Notas Para Alumnos</h1>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Programa de Notas</h1>
+        <p>Registro académico del curso</p>
+    </header>
+
+    <!-- Formulario para agregar alumnos -->
+    <main>
+        <div class="card" id="seccion-formulario">
+            <h2>Agregar Alumno</h2>
+
+            <form id="formulario">
+                <label for="nombre">Nombre</label>
+                <input class="input" id="nombre" type="text" placeholder="Ej. María González">
+
+                <label for="certamen1">Certamen 1</label>
+                <input class="input" id="certamen1" type="number" placeholder="Nota (1 - 100)">
+
+                <label for="certamen2">Certamen 2</label>
+                <input class="input" id="certamen2" type="number" placeholder="Nota (1 - 100)">
+
+                <label for="certamen3">Certamen 3</label>
+                <input class="input" id="certamen3" type="number" placeholder="Nota (1 - 100)">
+
+                <p id="contador" class="contador">0 / 10 alumnos registrados</p>
+
+                <button class="btn btn-rojo" id="btnAgregar" type="submit">
+                    Agregar Alumno
+                </button>
+            </form>
         </div>
-        <form class="content" id="formulario">
-            <label for="nombre">Nombre:</label>
-            <input class="input" id="nombre" name="nombre" type="text">
 
-            <label for="certamen1">Certamen 1:</label>
-            <input class="input" id="certamen1" name="certamen1" type="number">
+        <!-- Sección de resultados -->
+        <div class="card" id="seccion-resultados">
+            <h2>Resultados</h2>
+            <button class="btn btn-azul" id="btnCalcular" type="button">
+                Ver Resultados
+            </button>
+            <div id="resultados"></div>
+        </div>
+    </main>
 
-            <label for="certamen2">Certamen 2:</label>
-            <input class="input" id="certamen2" name="certamen2" type="number">
-
-            <label for="certamen3">Certamen 3:</label>
-            <input class="input" id="certamen3" name="certamen3" type="number">
-
-            <p id="contador-alumnos" class="contador">Alumnos agregados: 0 / 10</p>
-
-            <button class="button" id="buttonAdd" type="submit">Agregar Alumno</button>
-        </form>
-    </div>
-
-    <div id="calc" class="resultados">
-        <h2>Resultados:</h2>
-        <button type="button" class="button" id="buttonCal">Calcular</button>
-        <div id="contenido-resultados"></div>
-    </div>
-
+    <script src="js/programa.js"></script>
 </body>
 </html>

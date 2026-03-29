@@ -1,184 +1,188 @@
-const boton = document.getElementById("buttonAdd");
-const resultados = document.querySelector('#contenido-resultados');
-const botonResultados = document.getElementById("buttonCal");
-const contadorTexto = document.getElementById("contador-alumnos");
+var btnAgregar  = document.getElementById("btnAgregar");
+var btnCalcular = document.getElementById("btnCalcular");
+var contador    = document.getElementById("contador");
+var resultados  = document.getElementById("resultados");
 
-var alumnos = [];
-var matrizNotas = [];
+var nombres     = [];     
+var matrizNotas = [];       
 
-// FUNCIONES DE VALIDACIÓN
 function validarNombre(nombre) {
     if (nombre.trim() === "") {
-        alert("El nombre no puede estar vacío");
+        alert("El nombre no puede estar vacío.");
         return false;
     }
     return true;
 }
+
 function validarNotas(c1, c2, c3) {
     if (isNaN(c1) || isNaN(c2) || isNaN(c3)) {
-        alert("Las notas deben ser números válidos");
+        alert("Las notas deben ser números.");
         return false;
     }
     if (c1 < 1 || c2 < 1 || c3 < 1 || c1 > 100 || c2 > 100 || c3 > 100) {
-        alert("Las notas deben estar en el rango de 1 a 100");
+        alert("Las notas deben estar entre 1 y 100.");
         return false;
     }
     return true;
 }
 
-// Calcula el promedio de un arreglo de notas usando reduce
+// Calcula el promedio de un arreglo usando reduce
 function calcularPromedio(notas) {
-    return notas.reduce((sum, nota) => sum + nota, 0) / notas.length;
+    var suma = notas.reduce(function(acumulador, nota) {
+        return acumulador + nota;
+    }, 0);
+    return suma / notas.length;
+}
+// Promedio del curso en un certamen (columna de la matriz)
+function promedioCertamen(columna) {
+    var notasDelCertamen = matrizNotas.map(function(notas) {
+        return notas[columna];
+    });
+    return calcularPromedio(notasDelCertamen);
+}
+// Promedio general del curso
+function promedioGeneral() {
+    var promedios = matrizNotas.map(function(notas) {
+        return calcularPromedio(notas);
+    });
+    return calcularPromedio(promedios);
+}
+// Cuenta los alumnos aprobados (promedio >= 55)
+function contarAprobados() {
+    return matrizNotas.filter(function(notas) {
+        return calcularPromedio(notas) >= 55;
+    }).length;
+}
+// Cuenta los alumnos reprobados (promedio < 55)
+function contarReprobados() {
+    return matrizNotas.filter(function(notas) {
+        return calcularPromedio(notas) < 55;
+    }).length;
+}
+// Ordena los alumnos de mayor a menor promedio
+function ordenarAlumnos() {
+    var lista = nombres.map(function(nombre, i) {
+        return {
+            nombre: nombre,
+            promedio: calcularPromedio(matrizNotas[i])
+        };
+    });
+    lista.sort(function(a, b) {
+        return b.promedio - a.promedio;
+    });
+    return lista;
 }
 
-// Calcula el promedio de una columna específica de la matriz (un certamen)
-function calcularPromedioCertamen(matriz, columna) {
-    let notasCertamen = matriz.map(notas => notas[columna]);
-    return calcularPromedio(notasCertamen);
-}
-// Calcula el promedio general del curso
-function calcularPromedioGeneral(matriz) {
-    let promediosIndividuales = matriz.map(notas => calcularPromedio(notas));
-    return calcularPromedio(promediosIndividuales);
-}
-// Cuenta aprobados (promedio >= 55) usando filter
-function contarAprobados(matriz) {
-    let promedios = matriz.map(notas => calcularPromedio(notas));
-    return promedios.filter(p => p >= 55).length;
-}
-// Cuenta reprobados (promedio < 55) usando filter
-function contarReprobados(matriz) {
-    let promedios = matriz.map(notas => calcularPromedio(notas));
-    return promedios.filter(p => p < 55).length;
-}
-// Ordena los alumnos por promedio de mayor a menor usando sort
-function ordenarPorPromedio(nombres, matriz) {
-    // Crear arreglo de objetos con nombre y promedio
-    let alumnosConPromedio = nombres.map((nombre, indice) => ({
-        nombre: nombre,
-        promedio: calcularPromedio(matriz[indice])
-    }));
-    // Ordenar de mayor a menor
-    alumnosConPromedio.sort((a, b) => b.promedio - a.promedio);
-    return alumnosConPromedio;
-}
+//mANEJO DEL dom
+function mostrarAlumnos() {
+    nombres.forEach(function(nombre, i) {
+        var promedio    = calcularPromedio(matrizNotas[i]);
+        var esReprobado = promedio < 55;
 
-// Muestra el detalle de cada alumno
-function mostrarDetalleAlumnos(contenedor, nombres, matriz) {
-    nombres.forEach((alumno, indice) => {
-        let promedio = calcularPromedio(matriz[indice]);
-        let esReprobado = promedio < 55;
+        var div = document.createElement("div");
+        div.className = "alumno-card" + (esReprobado ? " reprobado" : "");
 
-        contenedor.innerHTML += `
-            <div class="alumno-bloque ${esReprobado ? 'alumno-reprobado' : ''}">
-                <p class="alumno-nombre">Nombre ${indice + 1}: ${alumno}</p>
-                <p>C1: ${matriz[indice][0]}</p>
-                <p>C2: ${matriz[indice][1]}</p>
-                <p>C3: ${matriz[indice][2]}</p>
-                <p class="alumno-promedio">Promedio: ${promedio.toFixed(2)}</p>
-            </div>
-        `;
+        div.innerHTML =
+            "<p class='alumno-nombre'>" + nombre + "</p>" +
+            "<p>Certamen 1: <strong>" + matrizNotas[i][0] + "</strong></p>" +
+            "<p>Certamen 2: <strong>" + matrizNotas[i][1] + "</strong></p>" +
+            "<p>Certamen 3: <strong>" + matrizNotas[i][2] + "</strong></p>" +
+            "<p class='alumno-promedio'>Promedio: " + promedio.toFixed(2) + "</p>";
+
+        resultados.appendChild(div);
     });
 }
 
-// Muestra el resumen del curso
-function mostrarResumenCurso(contenedor, matriz) {
-    let promedioC1 = calcularPromedioCertamen(matriz, 0);
-    let promedioC2 = calcularPromedioCertamen(matriz, 1);
-    let promedioC3 = calcularPromedioCertamen(matriz, 2);
-    let promedioGeneral = calcularPromedioGeneral(matriz);
-    let aprobados = contarAprobados(matriz);
-    let reprobados = contarReprobados(matriz);
-    contenedor.innerHTML += `
-        <div class="resumen-bloque">
-            <h3>Resumen del Curso</h3>
-            <p>Promedio del curso C1: <span class="resumen-valor">${promedioC1.toFixed(2)}</span></p>
-            <p>Promedio del curso C2: <span class="resumen-valor">${promedioC2.toFixed(2)}</span></p>
-            <p>Promedio del curso C3: <span class="resumen-valor">${promedioC3.toFixed(2)}</span></p>
-            <p>Promedio Final Curso: <span class="resumen-valor">${promedioGeneral.toFixed(2)}</span></p>
-            <div class="badge-container">
-                <div class="badge badge-aprobado">Aprobados: ${aprobados}</div>
-                <div class="badge badge-reprobado">Reprobados: ${reprobados}</div>
-            </div>
-        </div>
-    `;
+function mostrarResumen() {
+    var div = document.createElement("div");
+    div.className = "resumen";
+
+    div.innerHTML =
+        "<h3>Resumen del Curso</h3>" +
+        "<p>Promedio Certamen 1 <span>" + promedioCertamen(0).toFixed(2) + "</span></p>" +
+        "<p>Promedio Certamen 2 <span>" + promedioCertamen(1).toFixed(2) + "</span></p>" +
+        "<p>Promedio Certamen 3 <span>" + promedioCertamen(2).toFixed(2) + "</span></p>" +
+        "<p>Promedio General    <span>" + promedioGeneral().toFixed(2) + "</span></p>" +
+        "<div class='badges'>" +
+            "<div class='badge badge-aprobado'>Aprobados: " + contarAprobados() + "</div>" +
+            "<div class='badge badge-reprobado'>Reprobados: " + contarReprobados() + "</div>" +
+        "</div>";
+
+    resultados.appendChild(div);
 }
 
-// Muestra el ranking ordenado por promedio
-function mostrarRanking(contenedor, nombres, matriz) {
-    let ordenados = ordenarPorPromedio(nombres, matriz);
+function mostrarRanking() {
+    var ordenados = ordenarAlumnos();
+    var emojis    = ["🥇", "🥈", "🥉"];
 
-    let rankingHTML = `
-        <div class="ranking-bloque">
-            <h3>Ranking por Promedio</h3>
-    `;
+    var div = document.createElement("div");
+    div.className = "ranking";
 
-    ordenados.forEach((alumno, indice) => {
-        rankingHTML += `
-            <div class="ranking-item">
-                <span class="ranking-pos">${indice + 1}°</span>
-                <span class="ranking-nombre">${alumno.nombre}</span>
-                <span class="ranking-promedio">${alumno.promedio.toFixed(2)}</span>
-            </div>
-        `;
+    var html = "<h3>Ranking por Promedio</h3>";
+
+    ordenados.forEach(function(alumno, i) {
+        var posicion = i < 3 ? emojis[i] : (i + 1) + "°";
+        html +=
+            "<div class='ranking-item'>" +
+                "<span class='ranking-pos'>" + posicion + "</span>" +
+                "<span class='ranking-nombre'>" + alumno.nombre + "</span>" +
+                "<span class='ranking-promedio'>" + alumno.promedio.toFixed(2) + "</span>" +
+            "</div>";
     });
 
-    rankingHTML += `</div>`;
-    contenedor.innerHTML += rankingHTML;
+    div.innerHTML = html;
+    resultados.appendChild(div);
 }
-// Limpia el formulario
+
+// =============================================
+// HELPERS
+// =============================================
 function limpiarFormulario() {
-    document.getElementById("nombre").value = "";
+    document.getElementById("nombre").value    = "";
     document.getElementById("certamen1").value = "";
     document.getElementById("certamen2").value = "";
     document.getElementById("certamen3").value = "";
 }
-// Actualiza el contador de alumnos
-function actualizarContador() {
-    contadorTexto.textContent = `Alumnos agregados: ${alumnos.length} / 10`;
-}
-// EVENTOS
-// Evento: Agregar alumno
-boton.addEventListener("click", function(event) {
-    event.preventDefault();
-    const inputValue = document.getElementById("nombre").value;
-    const c1 = Number(document.getElementById("certamen1").value);
-    const c2 = Number(document.getElementById("certamen2").value);
-    const c3 = Number(document.getElementById("certamen3").value);
 
-    // Validaciones
-    if (!validarNombre(inputValue)) return;
+function actualizarContador() {
+    contador.textContent = nombres.length + " / 10 alumnos registrados";
+}
+
+// Evento: Agregar alumno
+btnAgregar.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var nombre = document.getElementById("nombre").value;
+    var c1     = Number(document.getElementById("certamen1").value);
+    var c2     = Number(document.getElementById("certamen2").value);
+    var c3     = Number(document.getElementById("certamen3").value);
+
+    if (!validarNombre(nombre))    return;
     if (!validarNotas(c1, c2, c3)) return;
 
-    // Guardar datos
-    alumnos.push(inputValue);
+    nombres.push(nombre);
     matrizNotas.push([c1, c2, c3]);
 
-    // Actualizar contador
     actualizarContador();
-
-    // Deshabilitar botón si hay 10 alumnos
-    if (alumnos.length >= 10) {
-        boton.disabled = true;
-        boton.textContent = "Máximo de alumnos alcanzado";
-    }
-    // Limpiar formulario
     limpiarFormulario();
+    // Si ya hay 10 alumnos, deshabilitar el botón
+    if (nombres.length >= 10) {
+        btnAgregar.disabled    = true;
+        btnAgregar.textContent = "Máximo alcanzado (10/10)";
+    }
 });
 // Evento: Calcular y mostrar resultados
-botonResultados.addEventListener("click", function(event) {
-    event.preventDefault();
-    // Verificar que hay alumnos
-    if (alumnos.length === 0) {
-        alert("No hay alumnos registrados. Agrega al menos uno.");
+btnCalcular.addEventListener("click", function() {
+    if (nombres.length === 0) {
+        alert("Primero agrega al menos un alumno.");
         return;
     }
     // Limpiar resultados anteriores
     resultados.innerHTML = "";
-    // Mostrar detalle de cada alumno
-    mostrarDetalleAlumnos(resultados, alumnos, matrizNotas);
-    // Mostrar resumen del curso
-    mostrarResumenCurso(resultados, matrizNotas);
-    // Mostrar ranking ordenado
-    mostrarRanking(resultados, alumnos, matrizNotas);
+
+    mostrarAlumnos();
+    mostrarResumen();
+    mostrarRanking();
+    // Scroll suave hacia los resultados
+    document.getElementById("seccion-resultados").scrollIntoView({ behavior: "smooth" });
 });

@@ -1,3 +1,21 @@
+/* =============================================
+   VARIABLES DE COLOR — Paleta Spider-Man
+   ============================================= */
+:root {
+    --rojo:        #c0392b;
+    --rojo-claro:  #f5d0cc;
+    --azul:        #1a56a0;
+    --azul-claro:  #dbeafe;
+    --fondo:       #f0f4ff;
+    --blanco:      #ffffff;
+    --borde:       #e2e8f0;
+    --texto:       #1e293b;
+    --texto-2:     #64748b;
+}
+
+/* =============================================
+   RESET BÁSICO
+   ============================================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,203 +23,315 @@
 }
 
 body {
-    background-color: #f0f4f8;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2d3748;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
     padding-bottom: 3rem;
 }
 
-h1 {
+/* =============================================
+   ENCABEZADO
+   ============================================= */
+header {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    font-size: 1.6rem;
-    color: #1a202c;
+    padding: 2.5rem 1rem 1.5rem;
+    /* Línea roja arriba, como el traje de Spider-Man */
+    border-top: 5px solid var(--rojo);
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--rojo);
+    letter-spacing: -0.5px;
+}
+
+header p {
+    color: var(--texto-2);
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/* =============================================
+   CONTENEDOR PRINCIPAL
+   ============================================= */
+main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* =============================================
+   TARJETAS
+   ============================================= */
+.card {
+    background-color: var(--blanco);
+    border-radius: 16px;
+    padding: 1.8rem;
+    /* Sombra azul muy sutil */
+    box-shadow: 0 4px 20px rgba(26, 86, 160, 0.10);
+    border: 1px solid var(--borde);
 }
 
 h2 {
-    font-size: 1.3rem;
-    color: #1a202c;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+/* =============================================
+   FORMULARIO
+   ============================================= */
 label {
+    display: block;
+    font-size: 0.82rem;
     font-weight: 600;
-    margin-bottom: 0.2rem;
+    color: var(--texto-2);
     margin-top: 1rem;
-    font-size: 16px;
-    color: #4a5568;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-    width: 90%;
-    max-width: 420px;
-    margin: 0 auto;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
-}
-
-.resultados {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-    width: 90%;
-    max-width: 420px;
-    margin: 2rem auto;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 0.3rem;
 }
 
 .input {
     width: 100%;
-    border-radius: 8px;
-    padding: 10px 12px;
-    border: 1.5px solid #e2e8f0;
-    font-size: 15px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--borde);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--texto);
+    background-color: var(--fondo);
     outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    background-color: #f7fafc;
+    /* Transición suave al hacer clic */
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+/* Quitar las flechas de los inputs numéricos */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
 }
 
+/* Efecto al hacer clic en un input */
 .input:focus {
-    border-color: #2ecc71;
-    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
-    background-color: #fff;
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(26, 86, 160, 0.12);
+    background-color: var(--blanco);
 }
 
-.button {
-    width: 100%;
-    margin-top: 1.2rem;
-    padding: 11px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    background-color: #2ecc71;
-    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-}
-
-.button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
-}
-
-.button:hover {
-    background-color: #27ae60;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
-}
-
-.button:disabled {
-    background-color: #a0aec0;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
+/* =============================================
+   CONTADOR DE ALUMNOS
+   ============================================= */
 .contador {
     text-align: center;
     margin-top: 1rem;
-    font-size: 14px;
-    color: #718096;
+    font-size: 0.8rem;
+    color: var(--texto-2);
     font-weight: 500;
 }
 
-/* Estilos para los resultados */
-.alumno-bloque {
-    background-color: #f7fafc;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-left: 4px solid #2ecc71;
+/* =============================================
+   BOTONES
+   ============================================= */
+.btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.2rem;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    font-weight: 700;
+    color: var(--blanco);
+    cursor: pointer;
+    /* Transición suave al pasar el mouse */
+    transition: opacity 0.2s, transform 0.1s;
 }
 
-.alumno-bloque p {
-    margin-bottom: 0.3rem;
-    font-size: 14px;
-    color: #4a5568;
+.btn:hover {
+    opacity: 0.88;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* Botón rojo — Spider-Man */
+.btn-rojo {
+    background-color: var(--rojo);
+}
+
+/* Botón azul — Spider-Man */
+.btn-azul {
+    background-color: var(--azul);
+}
+
+.btn:disabled {
+    background-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* =============================================
+   TARJETAS DE CADA ALUMNO
+   ============================================= */
+.alumno-card {
+    background-color: var(--fondo);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-top: 0.75rem;
+    /* Borde azul izquierdo — aprobado */
+    border-left: 4px solid var(--azul);
+    /* Animación simple al aparecer */
+    animation: aparecer 0.4s ease;
+}
+
+/* Borde rojo si el alumno reprobó */
+.alumno-card.reprobado {
+    border-left-color: var(--rojo);
+    background-color: #fff8f8;
+}
+
+/* Animación simple de entrada */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alumno-card p {
+    font-size: 0.85rem;
+    color: var(--texto-2);
+    margin-bottom: 0.2rem;
 }
 
 .alumno-nombre {
-    font-weight: 700;
-    font-size: 16px !important;
-    color: #1a202c !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--texto) !important;
     margin-bottom: 0.5rem !important;
 }
 
 .alumno-promedio {
-    font-weight: 600;
-    color: #2ecc71 !important;
-    margin-top: 0.3rem;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    margin-top: 0.4rem !important;
+    color: var(--azul) !important;
 }
 
-.alumno-reprobado {
-    border-left-color: #e74c3c;
+.reprobado .alumno-promedio {
+    color: var(--rojo) !important;
 }
 
-.alumno-reprobado .alumno-promedio {
-    color: #e74c3c !important;
+/* =============================================
+   RESUMEN DEL CURSO
+   ============================================= */
+.resumen {
+    margin-top: 1.2rem;
+    padding: 1.1rem;
+    background-color: var(--azul-claro);
+    border-radius: 12px;
+    border-top: 3px solid var(--azul);
+    animation: aparecer 0.4s ease;
 }
 
-/* Bloque de resumen */
-.resumen-bloque {
-    background-color: #edf2f7;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    border-top: 3px solid #2ecc71;
-}
-
-.resumen-bloque h3 {
-    font-size: 15px;
-    color: #1a202c;
+.resumen h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--azul);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 0.8rem;
 }
 
-.resumen-bloque p {
-    margin-bottom: 0.4rem;
-    font-size: 14px;
-    color: #4a5568;
+.resumen p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--texto-2);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(26, 86, 160, 0.12);
 }
 
-.resumen-valor {
-    font-weight: 600;
-    color: #2d3748;
+.resumen p:last-of-type {
+    border-bottom: none;
 }
 
-/* Bloque de ranking */
-.ranking-bloque {
-    background-color: #f7fafc;
+.resumen p span {
+    font-weight: 700;
+    color: var(--texto);
+}
+
+/* =============================================
+   BADGES DE APROBADOS / REPROBADOS
+   ============================================= */
+.badges {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.9rem;
+}
+
+.badge {
+    flex: 1;
+    text-align: center;
+    padding: 0.7rem;
     border-radius: 10px;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-top: 3px solid #3182ce;
+    font-weight: 700;
+    font-size: 0.85rem;
+    animation: aparecer 0.4s ease;
 }
 
-.ranking-bloque h3 {
-    font-size: 15px;
-    color: #1a202c;
+.badge-aprobado {
+    background-color: rgba(26, 86, 160, 0.12);
+    color: var(--azul);
+}
+
+.badge-reprobado {
+    background-color: var(--rojo-claro);
+    color: var(--rojo);
+}
+
+/* =============================================
+   RANKING
+   ============================================= */
+.ranking {
+    margin-top: 1rem;
+    padding: 1.1rem;
+    background-color: var(--blanco);
+    border-radius: 12px;
+    border-top: 3px solid var(--rojo);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
+    animation: aparecer 0.4s ease;
+}
+
+.ranking h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--rojo);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 0.8rem;
 }
 
 .ranking-item {
     display: flex;
-    justify-content: space-between;
-    padding: 0.4rem 0;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 14px;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.3rem;
+    border-bottom: 1px solid var(--borde);
+    font-size: 0.88rem;
+    animation: aparecer 0.4s ease;
 }
 
 .ranking-item:last-child {
@@ -209,43 +339,17 @@ input::-webkit-inner-spin-button {
 }
 
 .ranking-pos {
-    font-weight: 700;
-    color: #3182ce;
-    min-width: 30px;
+    font-size: 1.1rem;
+    min-width: 28px;
 }
 
 .ranking-nombre {
     flex: 1;
-    color: #4a5568;
+    color: var(--texto-2);
+    font-weight: 500;
 }
 
 .ranking-promedio {
-    font-weight: 600;
-    color: #2d3748;
-}
-
-/* Badge de aprobados/reprobados */
-.badge-container {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.8rem;
-}
-
-.badge {
-    flex: 1;
-    text-align: center;
-    padding: 0.6rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.badge-aprobado {
-    background-color: #c6f6d5;
-    color: #276749;
-}
-
-.badge-reprobado {
-    background-color: #fed7d7;
-    color: #9b2c2c;
+    font-weight: 700;
+    color: var(--texto);
 }
