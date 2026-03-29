@@ -12,12 +12,12 @@ boton.addEventListener("click", function(event){
     //Validacion De Espacios
     if (inputValue===""){
         alert("Nombre incompletos")
-        return event;
+        return;
     }
     //Validacion de Rango 1 a 100
-    if (c1,c2,c3 == 0){
-        alert("Na")
-        return event;
+    if (c1 < 1 || c2 < 1 || c3 < 1 || c1 > 100 || c2 > 100 || c3 > 100){
+        alert("Nota fuera de rango (1-100)")
+        return;
     }
     //Se Guarda El Nombre
     let contador = alumnos.push(inputValue);
